@@ -23,7 +23,7 @@ def do_charge():
         form['subject'] = "Your Subject"
         form['body'] = "Your Body"
     print form
-    pingpp.api_key = s.environ.get('PINGPP_APP_KEY',"123456")
+    pingpp.api_key = os.environ.get('PINGPP_APP_KEY',"123456")
     response_charge = pingpp.Charge.create(api_key=pingpp.api_key, **form)
     print "Response_Charge: " + str(response_charge)
     return Response(json.dumps(response_charge), mimetype='application/json')
