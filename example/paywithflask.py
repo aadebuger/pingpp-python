@@ -5,7 +5,7 @@ from flask import Flask,request,Response
 import json
 import random
 import string
-
+import os
 app = Flask(__name__)
 
 
@@ -17,13 +17,13 @@ def do_charge():
     orderno = ''.join(random.sample(string.ascii_letters + string.digits, 8))
     if isinstance(form, dict):
         form['order_no'] = orderno
-        form['app'] = dict(id="YOUR-APP-ID")
+        form['app'] = dict(id=os.environ.get('PINGPP_APP_ID',"123456"))
         form['currency'] = "cny"
         form['client_ip'] = "127.0.0.1"
         form['subject'] = "Your Subject"
         form['body'] = "Your Body"
     print form
-    pingpp.api_key = "YOUR-KEY"
+    pingpp.api_key = s.environ.get('PINGPP_APP_KEY',"123456")
     response_charge = pingpp.Charge.create(api_key=pingpp.api_key, **form)
     print "Response_Charge: " + str(response_charge)
     return Response(json.dumps(response_charge), mimetype='application/json')
