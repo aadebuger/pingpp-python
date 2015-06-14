@@ -228,7 +228,7 @@ class APIRequestor(object):
 
         if api_version is not None:
             headers['Pingplusplus-Version'] = api_version
-
+        print 'post_data',post_data
         rbody, rcode = self._client.request(
             method, abs_url, headers, post_data)
 
