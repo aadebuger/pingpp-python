@@ -13,6 +13,7 @@ app = Flask(__name__)
 def do_charge():
     print request.url
     form = request.get_json()
+    print 'data=',request.data
     print form
     orderno = ''.join(random.sample(string.ascii_letters + string.digits, 8))
     if isinstance(form, dict):
